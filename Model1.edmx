@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ITDailyMaintenanceModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="ITDailyMaintenanceModelStoreContainer">
+          <EntitySet Name="sysdiagrams" EntityType="ITDailyMaintenanceModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Task" EntityType="ITDailyMaintenanceModel.Store.Task" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="User" EntityType="ITDailyMaintenanceModel.Store.User" store:Type="Tables" Schema="dbo" />
+        </EntityContainer>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="tID" />
+          </Key>
+          <Property Name="tID" Type="int" Nullable="false" />
+          <Property Name="tName" Type="varchar" Nullable="false" MaxLength="250" />
+          <Property Name="editAble_100AM" Type="bit" Nullable="false" />
+          <Property Name="doneAt100" Type="varchar" Nullable="false" MaxLength="5000" />
+          <Property Name="editAble_600AM" Type="bit" Nullable="false" />
+          <Property Name="doneAt600" Type="varchar" Nullable="false" MaxLength="5000" />
+          <Property Name="editAble_400PM" Type="bit" Nullable="false" />
+          <Property Name="doneAt400" Type="varchar" Nullable="false" MaxLength="5000" />
+          <Property Name="comment" Type="varchar" Nullable="false" />
+          <Property Name="commentedBy" Type="int" Nullable="false" />
+          <Property Name="CheckedBy" Type="varchar" MaxLength="5000" />
+          <Property Name="SupervisedBy" Type="varchar" MaxLength="5000" />
+          <Property Name="orderID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="int" Nullable="false" />
+          <Property Name="userName" Type="varchar" Nullable="false" MaxLength="1000" />
+          <Property Name="userPass" Type="varchar" Nullable="false" MaxLength="1000" />
+          <Property Name="userlsSupervisor" Type="bit" Nullable="false" />
+          <Property Name="checkedBy" Type="varchar" Nullable="false" MaxLength="1000" />
+          <Property Name="supervisedBy" Type="varchar" Nullable="false" MaxLength="1000" />
+        </EntityType>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ITDailyMaintenanceModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Tasks" EntityType="ITDailyMaintenanceModel.Task" />
+          <EntitySet Name="Users" EntityType="ITDailyMaintenanceModel.User" />
+          <EntitySet Name="sysdiagrams" EntityType="ITDailyMaintenanceModel.sysdiagram" />
+        </EntityContainer>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="tID" />
+          </Key>
+          <Property Name="tID" Type="Int32" Nullable="false" />
+          <Property Name="tName" Type="String" Nullable="false" MaxLength="250" Unicode="false" FixedLength="false" />
+          <Property Name="editAble_600AM" Type="Boolean" Nullable="false" />
+          <Property Name="doneAt600" Type="String" Nullable="false" MaxLength="5000" Unicode="false" FixedLength="false" />
+          <Property Name="editAble_400PM" Type="Boolean" Nullable="false" />
+          <Property Name="doneAt400" Type="String" Nullable="false" MaxLength="5000" Unicode="false" FixedLength="false" />
+          <Property Name="editAble_100AM" Type="Boolean" Nullable="false" />
+          <Property Name="doneAt100" Type="String" Nullable="false" MaxLength="5000" Unicode="false" FixedLength="false" />
+          <Property Name="comment" Type="String" Nullable="false" MaxLength="5000" Unicode="false" FixedLength="false" />
+          <Property Name="commentedBy" Type="Int32" Nullable="false" />
+          <Property Type="String" Name="CheckedBy" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SupervisedBy" MaxLength="5000" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="orderID" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="Int32" Nullable="false" />
+          <Property Name="userName" Type="String" Nullable="false" MaxLength="1000" Unicode="false" FixedLength="false" />
+          <Property Name="userPass" Type="String" Nullable="false" MaxLength="1000" Unicode="false" FixedLength="false" />
+          <Property Name="userlsSupervisor" Type="Boolean" Nullable="false" />
+          <Property Name="checkedBy" Type="String" Nullable="false" MaxLength="1000" Unicode="false" FixedLength="false" />
+          <Property Name="supervisedBy" Type="String" Nullable="false" MaxLength="1000" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Type="String" Name="name" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="principal_id" Nullable="false" />
+          <Property Type="Int32" Name="diagram_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="version" />
+          <Property Type="Binary" Name="definition" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ITDailyMaintenanceModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Tasks"><EntityTypeMapping TypeName="ITDailyMaintenanceModel.Task"><MappingFragment StoreEntitySet="Task">
+            <ScalarProperty Name="orderID" ColumnName="orderID" />
+                <ScalarProperty Name="SupervisedBy" ColumnName="SupervisedBy" />
+                <ScalarProperty Name="CheckedBy" ColumnName="CheckedBy" />
+                <ScalarProperty Name="tID" ColumnName="tID" />
+            <ScalarProperty Name="tName" ColumnName="tName" />
+            <ScalarProperty Name="editAble_600AM" ColumnName="editAble_600AM" />
+            <ScalarProperty Name="doneAt600" ColumnName="doneAt600" />
+            <ScalarProperty Name="editAble_400PM" ColumnName="editAble_400PM" />
+            <ScalarProperty Name="doneAt400" ColumnName="doneAt400" />
+            <ScalarProperty Name="editAble_100AM" ColumnName="editAble_100AM" />
+            <ScalarProperty Name="doneAt100" ColumnName="doneAt100" />
+            <ScalarProperty Name="comment" ColumnName="comment" />
+            <ScalarProperty Name="commentedBy" ColumnName="commentedBy" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Users"><EntityTypeMapping TypeName="ITDailyMaintenanceModel.User"><MappingFragment StoreEntitySet="User">
+            <ScalarProperty Name="userID" ColumnName="userID" />
+            <ScalarProperty Name="userName" ColumnName="userName" />
+            <ScalarProperty Name="userPass" ColumnName="userPass" />
+            <ScalarProperty Name="userlsSupervisor" ColumnName="userlsSupervisor" />
+            <ScalarProperty Name="checkedBy" ColumnName="checkedBy" />
+            <ScalarProperty Name="supervisedBy" ColumnName="supervisedBy" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ITDailyMaintenanceModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Model1">
+        <EntityTypeShape EntityType="ITDailyMaintenanceModel.Task" Width="1.5" PointX="0.75" PointY="0.75" Height="2.9417936197916665" IsExpanded="true" />
+        <EntityTypeShape EntityType="ITDailyMaintenanceModel.User" Width="1.5" PointX="2.75" PointY="0.75" Height="2.1725878906249996" IsExpanded="true" />
+        <EntityTypeShape EntityType="ITDailyMaintenanceModel.sysdiagram" Width="1.5" PointX="3.375" PointY="3.75" Height="1.9802864583333322" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>
